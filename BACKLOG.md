@@ -26,5 +26,4 @@ tell what's been waiting longest. Promote to a session when picking up.
 
 ## Operational
 
-- **Draft → publish pipeline.** Skill that turns one `01_Capture/YYYY-MM-DD.md` entry into a draft Astro post + Substack draft + LinkedIn pre-write + tweet thread. Extends the Remotion pipeline to text. (2026-05-15)
 - **Stop Doing list against the site.** Apply the $150/hr filter to every section. Anything that doesn't either advance M1 (100M DIDs) or feed the newsletter is a candidate for cut. (2026-05-15)
