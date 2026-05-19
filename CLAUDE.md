@@ -73,6 +73,29 @@ public/                # static assets only — served at site root
 - [BACKLOG.md](BACKLOG.md) — outstanding work
 - `Plans/` — one-off planning artifacts (not load-bearing)
 
+## Section Investment Posture
+
+Some sections are deliberately dormant — they stay live but earn no new effort. Filter from [BACKLOG.md](BACKLOG.md): an update is worth doing only if it advances M1 (100M DIDs by 2034) or feeds The Shifting Current newsletter. Everything else is hobby surface.
+
+**Dormant sections — push back before working on them:**
+
+- `src/content/themes/`
+- `src/content/curation/`
+- Side projects in `src/content/projects/` (anything that isn't `open-commercial-media-ecosystem.md` or `trust-over-ip.md` — e.g. `cycling-and-health.md`, `new-century-school.md`)
+- `src/content/predictions/` — unless it's a deliberate T1–T4 thesis batch per [BACKLOG.md](BACKLOG.md)
+- Consulting bucket in `src/pages/connect.astro`
+
+**Rule:** When Andy asks for an update, new entry, restyle, or buildout in any of these, **challenge first** — one short line, e.g. *"This is in the dormant set per CLAUDE.md — does this actually beat M1 / newsletter work right now?"* Wait for the call. He may override; that's fine, he just wants to be warned.
+
+**Invest-here sections — default priority, no challenge needed:**
+
+- `src/pages/2034.astro` + `src/data/ssi-progress.ts`
+- `src/content/ideas/`
+- `src/content/projects/open-commercial-media-ecosystem.md` and `trust-over-ip.md`
+- `src/pages/index.astro`, `src/pages/about.astro`
+
+Background: see `~/.claude/PAI/MEMORY/WORK/site-stop-doing-filter/ISA.md` for the full pass.
+
 ## Gotchas
 
 - **Bun, not npm.** Zero exceptions.

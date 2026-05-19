@@ -1,0 +1,251 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="MCP Servers"
+  description="Where I'm leaning my building hours — Model Context Protocol servers that connect agents to real tools. One in production, more on the way."
+>
+  <h1>MCP Servers</h1>
+  <p class="lede">
+    Where I'm putting my building hours. Model Context Protocol is becoming the plumbing
+    between agents and the real world — I'm running one server in production today and shipping
+    the next two, betting this niche matters more in 2026 than the consensus has priced in.
+  </p>
+
+  <section class="mcp-counter">
+    <div class="mcp-stat">
+      <span class="mcp-num">1</span>
+      <span class="mcp-label">In production</span>
+    </div>
+    <div class="mcp-stat">
+      <span class="mcp-num">2</span>
+      <span class="mcp-label">In development</span>
+    </div>
+    <div class="mcp-stat">
+      <span class="mcp-num">2025</span>
+      <span class="mcp-label">First deploy</span>
+    </div>
+  </section>
+
+  <h2>In production</h2>
+
+  <article class="server">
+    <header class="server-head">
+      <h3>Todoist + Telemetry Logging</h3>
+      <span class="server-status server-status-prod">Production · since Sep 2025</span>
+    </header>
+    <p>
+      A remote, GitHub-OAuth-protected MCP server that gives any agent secure read/write access
+      to my Todoist — and quietly logs every tool call so the AI can answer "how much time did
+      you save me?" Two surfaces in one server: a Todoist control plane and an AI-usage
+      observability plane. Live on Cloudflare's edge since September 2025.
+    </p>
+    <dl class="server-meta">
+      <dt>Live</dt>
+      <dd>Cloudflare Workers</dd>
+      <dt>Stack</dt>
+      <dd>Cloudflare Workers + Durable Objects + D1 + KV</dd>
+      <dt>Auth</dt>
+      <dd>GitHub OAuth (per-user approval, not a shared API key)</dd>
+      <dt>SDK</dt>
+      <dd class="sdk-stack">
+        <code>@modelcontextprotocol/sdk</code>
+        <code>@cloudflare/workers-oauth-provider</code>
+      </dd>
+      <dt>Why it matters</dt>
+      <dd>
+        Quantifies the AI's actual impact — every tool call lands in D1 with a configurable
+        time-saved weight, so the server can answer <em>"how much time did you save me this
+        month?"</em> with real numbers. Most MCP servers expose data; this one also measures
+        itself.
+      </dd>
+    </dl>
+  </article>
+
+  <h2>In development</h2>
+
+  <article class="server">
+    <header class="server-head">
+      <h3>Madison Endurance Sports</h3>
+      <span class="server-status server-status-dev">In development</span>
+    </header>
+    <p>
+      Discovery and planning tool for Madison-area endurance athletes — races, group rides,
+      week-of and day-of NWS weather, and Strava activity history — wrapped in a
+      slash-command surface (<code>/race_prep</code>, <code>/group_ride_tonight</code>,
+      <code>/post_race_debrief</code>, <code>/season_plan</code>) with
+      autocomplete-from-tool-results so race names and activity IDs populate as dropdowns
+      instead of UUIDs to memorize.
+    </p>
+    <dl class="server-meta">
+      <dt>Stack</dt>
+      <dd>Python — FastMCP + Prefect Horizon</dd>
+      <dt>Auth</dt>
+      <dd>Generally Public. Strava OAuth-bridge as add on for extra functionality.</dd>
+      <dt>SDK</dt>
+      <dd class="sdk-stack">
+        <code>fastmcp</code>
+        <code>prefect</code>
+      </dd>
+      <dt>Why it matters</dt>
+      <dd>
+        Race calendars, group rides, NWS weather, and Strava history currently live across
+        half a dozen tabs. This collapses Madison endurance planning into a single agent
+        conversation built around how athletes actually think — <em>"should I race
+        Saturday?"</em> instead of five tabs and a guess. Local-Madison focus means the data
+        is curated to the community, not crawled from a global app.
+      </dd>
+    </dl>
+  </article>
+
+    <article class="server">
+    <header class="server-head">
+      <h3>Household + Food</h3>
+      <span class="server-status server-status-dev">In development</span>
+    </header>
+    <p>
+      One MCP server, two domains — a shared context layer my wife and I both pass data through.
+      Household side: shared calendars, home-maintenance reminders, weekend agenda buffer.
+      Food side: pantry inventory, fridge and freezer inventory, weekly meal plan, and an
+      auto-generated shopping list that's just meal plan minus inventory.
+    </p>
+    <p>
+      The user interface isn't tools, it's slash commands —
+      <code>/plan_week</code>, <code>/weekend_brief</code>, <code>/restock_decision</code>,
+      <code>/maintenance_check</code> — so neither of us has to learn an API to use what's
+      really a shared family operating layer.
+    </p>
+  </article>
+
+  <h2>Why MCP, why now</h2>
+
+  <p>
+    The protocol consolidated in 2025 — one transport survived (Streamable HTTP), auth
+    formalized around OAuth 2.1 + PKCE + Dynamic Client Registration, Cloudflare turned into a
+    first-class host. The hard parts of writing a remote, secure, multi-user MCP server are now
+    ~80% scaffolded. The remaining 20% is the part I want to be known for: agent-native product
+    design — discovery, iteration, context. Most servers expose APIs. The good ones design for
+    how an agent actually <em>uses</em> them.
+  </p>
+
+  <p>
+    The longer bet: agents need trust. MCP today authenticates the user to the server; it
+    doesn't carry verifiable identity for the agent acting on the user's behalf. Self-sovereign
+    identity is the missing layer there — and
+    <a href="/2034/">that's the ten-year bet</a> this MCP work is the agent-side counterpart to.
+  </p>
+</Base>
+
+<style>
+  .lede {
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+  }
+  .mcp-counter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2.5rem 0 3rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+    background: var(--color-code-bg);
+  }
+  .mcp-stat {
+    text-align: center;
+  }
+  .mcp-num {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+  }
+  .mcp-label {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .server {
+    margin: 2.25rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+  }
+  .server-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .server-head h3 {
+    margin: 0;
+  }
+  .server-status {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .server-status-prod {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .server-status-dev {
+    background: var(--color-rule);
+    color: var(--color-muted);
+  }
+  .server-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 1.25rem;
+    row-gap: 0.4rem;
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+  }
+  .server-meta dt {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    padding-top: 0.15rem;
+  }
+  .server-meta dd {
+    margin: 0;
+  }
+  .sdk-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  @media (max-width: 640px) {
+    .mcp-counter {
+      padding: 1rem 0.5rem;
+    }
+    .mcp-num {
+      font-size: 2rem;
+    }
+    .server-meta {
+      grid-template-columns: 1fr;
+      row-gap: 0.5rem;
+    }
+    .server-meta dt {
+      padding-top: 0.5rem;
+    }
+  }
+</style>
