@@ -15,11 +15,11 @@ import Base from '../layouts/Base.astro';
 
   <section class="mcp-counter">
     <div class="mcp-stat">
-      <span class="mcp-num">1</span>
-      <span class="mcp-label">In production</span>
+      <span class="mcp-num">2</span>
+      <span class="mcp-label">Shipped</span>
     </div>
     <div class="mcp-stat">
-      <span class="mcp-num">2</span>
+      <span class="mcp-num">1</span>
       <span class="mcp-label">In development</span>
     </div>
     <div class="mcp-stat">
@@ -28,7 +28,7 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
-  <h2>In production</h2>
+  <h2>Shipped</h2>
 
   <article class="server">
     <header class="server-head">
@@ -63,43 +63,67 @@ import Base from '../layouts/Base.astro';
     </dl>
   </article>
 
-  <h2>In development</h2>
-
   <article class="server">
     <header class="server-head">
       <h3>Madison Endurance Sports</h3>
-      <span class="server-status server-status-dev">In development</span>
+      <span class="server-status server-status-prod">Shipped · v0.1 · May 2026</span>
     </header>
     <p>
-      Discovery and planning tool for Madison-area endurance athletes — races, group rides,
-      week-of and day-of NWS weather, and Strava activity history — wrapped in a
-      slash-command surface (<code>/race_prep</code>, <code>/group_ride_tonight</code>,
-      <code>/post_race_debrief</code>, <code>/season_plan</code>) with
-      autocomplete-from-tool-results so race names and activity IDs populate as dropdowns
-      instead of UUIDs to memorize.
+      A FastMCP server for Madison-area endurance athletes — race discovery, NWS race-day
+      weather, and recurring group rides — wrapped in a <code>/race_prep</code> slash command
+      that resolves fuzzy race references (<code>"madtown half"</code> → the right race) and
+      returns a focused pre-race read: how long you'll be out there, what conditions to
+      expect, and basic nutrition matched to both.
     </p>
+
+    <div class="server-video">
+      <iframe
+        src="https://www.youtube.com/embed/G2FDquPLqWE"
+        title="Madison Endurance Sports MCP Server — 90-second demo"
+        loading="lazy"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
     <dl class="server-meta">
       <dt>Stack</dt>
-      <dd>Python — FastMCP + Prefect Horizon</dd>
-      <dt>Auth</dt>
-      <dd>Generally Public. Strava OAuth-bridge as add on for extra functionality.</dd>
-      <dt>SDK</dt>
-      <dd class="sdk-stack">
-        <code>fastmcp</code>
-        <code>prefect</code>
+      <dd>Python — FastMCP 3.x on Prefect Horizon</dd>
+      <dt>Surface</dt>
+      <dd>
+        <code>find_races</code>, <code>race_weather</code>, <code>find_group_rides</code>,
+        and the <code>/race_prep</code> prompt
+      </dd>
+      <dt>Data</dt>
+      <dd>
+        Hand-curated Madison race + group-ride seed (Ironman Wisconsin, Run Madtown, Horribly
+        Hilly, Wisconsin Triathlon Series, Trek Bicycle Madison rides, MadCity Runners…); NWS
+        for inside-7-days forecasts; bundled 30-year NOAA climate normals beyond. Optional
+        RunSignup enrichment when an API key is provided.
+      </dd>
+      <dt>Repo</dt>
+      <dd>
+        <a href="https://github.com/andywoodruff6/mes-mcp-server" rel="noopener">
+          github.com/andywoodruff6/mes-mcp-server
+        </a>
       </dd>
       <dt>Why it matters</dt>
       <dd>
-        Race calendars, group rides, NWS weather, and Strava history currently live across
-        half a dozen tabs. This collapses Madison endurance planning into a single agent
-        conversation built around how athletes actually think — <em>"should I race
-        Saturday?"</em> instead of five tabs and a guess. Local-Madison focus means the data
-        is curated to the community, not crawled from a global app.
+        Two design moves I want to be known for: <em>(1) dual-channel weather</em> — the
+        server refuses to invent race-day forecasts beyond NWS's honest 7-day horizon, and
+        falls back to a labeled climate normal rather than confidently presenting next
+        week's weather as race day's. <em>(2) Fuzzy slash-command UX</em> — slash commands
+        that demand UUIDs are a portfolio piece, not a product; resolving
+        <code>"madtown half"</code> server-side is the difference. The piece collapses six
+        websites of Madison endurance planning into one MCP conversation built on FastMCP
+        idioms a Prefect engineer can read in under five minutes.
       </dd>
     </dl>
   </article>
 
-    <article class="server">
+  <h2>In development</h2>
+
+  <article class="server">
     <header class="server-head">
       <h3>Household + Food</h3>
       <span class="server-status server-status-dev">In development</span>
@@ -207,6 +231,22 @@ import Base from '../layouts/Base.astro';
   .server-status-dev {
     background: var(--color-rule);
     color: var(--color-muted);
+  }
+  .server-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 1.25rem 0 0;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--color-code-bg);
+  }
+  .server-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
   .server-meta {
     display: grid;
