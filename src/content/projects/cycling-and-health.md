@@ -1,7 +1,7 @@
 ---
 date: '2026-01-01'
 draft: false
-order: 5
+order: 6
 role: 'Health'
 title: 'Cycling & Personal Health'
 description: "Riding, lifting, and the rest of the maintenance work. The compute that matters most runs on the body that produces it."

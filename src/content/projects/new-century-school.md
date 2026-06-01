@@ -1,7 +1,7 @@
 ---
 date: '2026-04-01'
 draft: false
-order: 4
+order: 5
 role: 'Serving'
 link: 'https://www.niche.com/k12/new-century-school-verona-wi/'
 title: 'New Century School — Governance Council'
