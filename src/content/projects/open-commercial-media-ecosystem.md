@@ -22,11 +22,11 @@ OCME flips the model. Creators, curators, and industry members are members of th
 
 ## Where we are
 
-| Metric | Value (as of March 2026) |
+| Metric | Value (as of June 2026) |
 |---|---|
-| Members | 900+ |
-| Content pieces | 6,500+ |
-| Total DIDs in registry | ~16,686 |
+| Members | 896 |
+| Content pieces | 5,798 |
+| Total DIDs in registry | 19,108 |
 
 Live progress against the 2034 master goal: [2034](/2034/).
 

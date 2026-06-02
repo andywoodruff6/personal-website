@@ -60,6 +60,23 @@ export const SNAPSHOTS: MonthlySnapshot[] = [
     ],
     notes: 'First fully verified count. Four DID types previously uncounted now reconciled.',
   },
+  {
+    month: '2026-06',
+    members: 896,
+    contentPieces: 5_798,
+    activeUploaders: 0, // not pulled this cycle
+    totalDIDs: 19_108,
+    multiplier: 21.3,
+    breakdown: [
+      { type: 'Member DIDs', count: 896, notes: '1 per member' },
+      { type: 'Content DIDs', count: 17_394, notes: '5,798 content × 3 DIDs each' },
+      { type: 'Playlist DIDs', count: 186, notes: '~30-min streaming segments' },
+      { type: 'Play Records', count: 186, notes: '1 per playlist per broadcast' },
+      { type: 'Revenue Receipts', count: 15, notes: '~4-5 / month' },
+      { type: 'Payment Records', count: 431, notes: '1 per creator paid per month' },
+    ],
+    notes: 'Members surged +37.6% over March; multiplier dipped 25.6× → 21.3× as the new cohort dilutes the average before ramping content/payments. Every DID type grew in absolute terms.',
+  },
 ];
 
 export function latest(): MonthlySnapshot {
