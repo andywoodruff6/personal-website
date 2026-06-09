@@ -113,7 +113,7 @@ main {
   width: 100%;
   max-width: var(--measure);
   margin: 0 auto;
-  padding: var(--space-4) clamp(1rem, 0.5rem + 2vw, 1.5rem);
+  padding: var(--space-2) clamp(1rem, 0.5rem + 2vw, 1.5rem) var(--space-4);
 }
 
 /* ---- Headings: Plex Sans, tight, decisive ---- */
@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: var(--space-4) 0 var(--space-2);
   color: var(--color-text);
 }
-h1 { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.025em; }
+h1 { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.025em; margin-top: var(--space-2); }
 h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); }
 h4 { font-size: 1.05rem; }
@@ -222,6 +222,12 @@ th {
   padding: 0 var(--space-2);
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nav-top {
+  width: 100%;
+  display: flex;
   align-items: center;
   gap: var(--space-2);
 }
