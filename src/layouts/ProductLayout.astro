@@ -1,0 +1,127 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  type: 'physical' | 'digital';
+  status?: string;
+  price?: string;
+  cover?: string;
+  gallery?: string[];
+  link?: string;
+}
+
+const { title, description, type, status, price, cover, gallery = [], link } = Astro.props;
+const heroImages = cover ? [cover, ...gallery.filter((g) => g !== cover)] : gallery;
+---
+
+<Base title={title} description={description} ogImage={cover}>
+  <article class="product">
+    <a href="/products/" class="product-back">← All products</a>
+
+    <header class="product-header">
+      <span class={`product-badge product-badge-${type}`}>{type}</span>
+      <h1>{title}</h1>
+      {description && <p class="product-lede">{description}</p>}
+      <div class="product-facts">
+        {price && <span class="product-price">{price}</span>}
+        {status && <span class="product-status">{status}</span>}
+        {link && (
+          <a class="product-buy" href={link} rel="noopener">
+            {type === 'physical' ? 'Buy' : 'Get it'} →
+          </a>
+        )}
+      </div>
+    </header>
+
+    {heroImages.length > 0 && (
+      <div class="product-gallery">
+        {heroImages.map((img) => (
+          <img src={img} alt={title} loading="lazy" />
+        ))}
+      </div>
+    )}
+
+    <div class="product-body">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .product {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  .product-back {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-sm);
+    color: var(--color-muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .product-back:hover { color: var(--color-accent); }
+
+  .product-header { margin-bottom: 1.75rem; }
+  .product-header h1 { margin: 0.5rem 0 0.4rem; }
+  .product-lede {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: var(--measure);
+  }
+
+  .product-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    color: var(--color-bg);
+  }
+  .product-badge-physical { background: var(--color-accent); }
+  .product-badge-digital { background: var(--color-link); }
+
+  .product-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-md);
+  }
+  .product-price { font-weight: 600; }
+  .product-status { color: var(--color-signal); }
+  .product-buy {
+    margin-left: auto;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    text-decoration: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: opacity 0.15s ease;
+  }
+  .product-buy:hover { opacity: 0.85; }
+
+  .product-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 0 0 2rem;
+  }
+  .product-gallery img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--color-rule);
+    display: block;
+  }
+
+  .product-body {
+    max-width: var(--measure);
+  }
+</style>

@@ -96,6 +96,7 @@ const websiteJsonLd = {
   <body>
     <header class="site-header">
       <nav class="site-nav">
+        <div class="nav-top">
         <a href="/" class="brand">
           <BadgerLogo size={36} class="brand-mark" />
           <span class="brand-text">
@@ -118,18 +119,20 @@ const websiteJsonLd = {
             <path d="M5 5l14 14M19 5l-14 14" />
           </svg>
         </button>
+        <ThemeToggle />
+        </div>
         <ul id="primary-nav">
           <li><a href="/2034/">2034</a></li>
           <li><a href="/mcp/">MCP</a></li>
           <li><a href="/themes/">Themes</a></li>
           <li><a href="/projects/">Projects</a></li>
+          <li><a href="/products/">Products</a></li>
           <li><a href="/predictions/">Predictions</a></li>
           <li><a href="/ideas/">Ideas</a></li>
           <li><a href="/curation/">Curation</a></li>
           <li><a href="/speaking/">Speaking</a></li>
           <li><a href="/about/">About</a></li>
         </ul>
-        <ThemeToggle />
       </nav>
     </header>
     <script is:inline>

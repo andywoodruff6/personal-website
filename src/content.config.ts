@@ -71,4 +71,15 @@ const themes = defineCollection({
   }),
 });
 
-export const collections = { projects, predictions, ideas, curation, themes };
+const products = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/products' }),
+  schema: baseSchema.extend({
+    type: z.enum(['physical', 'digital']),
+    status: optionalString,
+    price: optionalString,
+    gallery: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, predictions, ideas, curation, themes, products };

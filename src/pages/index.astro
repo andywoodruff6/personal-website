@@ -4,19 +4,16 @@ import Currently from '../components/Currently.astro';
 import MissionMeter from '../components/MissionMeter.astro';
 import { getCollection } from 'astro:content';
 
-const sectionsToShow = ['ideas', 'predictions'] as const;
+const ideas = await getCollection('ideas', ({ data }) => import.meta.env.DEV || !data.draft);
+ideas.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+const recentIdeas = ideas.slice(0, 4);
 
-async function recentFor(section: typeof sectionsToShow[number], n: number) {
-  const all = await getCollection(section, ({ data }) => import.meta.env.DEV || !data.draft);
-  return all
-    .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
-    .slice(0, n);
-}
-
-const [predictions, ideas] = await Promise.all([
-  recentFor('predictions', 4),
-  recentFor('ideas', 4),
-]);
+const allProducts = await getCollection('products', ({ data }) => import.meta.env.DEV || !data.draft);
+allProducts.sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+});
+const featuredProducts = allProducts.slice(0, 2);
 
 function fmt(d?: Date) {
   return d ? d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
@@ -44,11 +41,11 @@ function fmt(d?: Date) {
   <Currently />
 
   <section class="home-section">
-    <h2 class="section-label"><span class="section-number">01</span> Predictions</h2>
+    <h2 class="section-label"><span class="section-number">01</span> Ideas</h2>
     <ul class="post-list">
-      {predictions.map((p) => (
+      {recentIdeas.map((p) => (
         <li>
-          <a class="post-list-title" href={`/predictions/${p.id}/`}>{p.data.title}</a>
+          <a class="post-list-title" href={`/ideas/${p.id}/`}>{p.data.title}</a>
           <span class="post-list-meta">{fmt(p.data.date)}</span>
           {p.data.description && <p class="post-list-desc">{p.data.description}</p>}
         </li>
@@ -57,16 +54,27 @@ function fmt(d?: Date) {
   </section>
 
   <section class="home-section">
-    <h2 class="section-label"><span class="section-number">02</span> Ideas</h2>
-    <ul class="post-list">
-      {ideas.map((p) => (
-        <li>
-          <a class="post-list-title" href={`/ideas/${p.id}/`}>{p.data.title}</a>
-          <span class="post-list-meta">{fmt(p.data.date)}</span>
-          {p.data.description && <p class="post-list-desc">{p.data.description}</p>}
+    <h2 class="section-label"><span class="section-number">02</span> Products</h2>
+    <ul class="home-product-grid">
+      {featuredProducts.map((p) => (
+        <li class="home-product-card">
+          <a href={`/products/${p.id}/`}>
+            <div class="home-product-media">
+              {p.data.cover && <img src={p.data.cover} alt={p.data.title} loading="lazy" />}
+              <span class={`home-product-badge home-product-badge-${p.data.type}`}>{p.data.type}</span>
+            </div>
+            <div class="home-product-body">
+              <h3 class="home-product-title">{p.data.title}</h3>
+              <div class="home-product-meta">
+                {p.data.price && <span class="home-product-price">{p.data.price}</span>}
+                {p.data.status && <span class="home-product-status">{p.data.status}</span>}
+              </div>
+            </div>
+          </a>
         </li>
       ))}
     </ul>
+    <p class="home-product-more"><a href="/products/">All products →</a></p>
   </section>
 
   <section class="home-section">
@@ -85,6 +93,89 @@ function fmt(d?: Date) {
 </Base>
 
 <style>
+  .home-product-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .home-product-card { margin: 0; }
+  .home-product-card > a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--color-rule);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--color-bg);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .home-product-card > a:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 28px rgba(16, 15, 15, 0.12);
+  }
+  .home-product-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--color-bg-2);
+    overflow: hidden;
+  }
+  .home-product-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .home-product-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    color: var(--color-bg);
+  }
+  .home-product-badge-physical { background: var(--color-accent); }
+  .home-product-badge-digital { background: var(--color-link); }
+  .home-product-body {
+    padding: 0.85rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .home-product-title {
+    font-size: var(--fs-h3);
+    margin: 0;
+  }
+  .home-product-meta {
+    margin-top: auto;
+    padding-top: 0.4rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-sm);
+  }
+  .home-product-price { font-weight: 600; }
+  .home-product-status { color: var(--color-signal); }
+  .home-product-more {
+    margin-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-sm);
+  }
+  @media (max-width: 480px) { /* --bp-sm */
+    .home-product-grid { grid-template-columns: 1fr; }
+  }
+
   .substack-embed {
     margin-top: 1rem;
     display: flex;
