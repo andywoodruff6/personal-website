@@ -24,6 +24,10 @@ tell what's been waiting longest. Promote to a session when picking up.
 - **`/connect/` page with structured intent.** Three buckets: Partnership (OCME), Consulting (Shifting Current Consulting Ops), Press / Speaking. (2026-05-15)
 
 
+## Products
+
+- **"Register interest" capture on product pages.** Let a visitor signal interest in buying a physical product (AI Token Counter, Cycling Charging Station) by sharing their email. First pass used a `mailto:` CTA — rejected because it opens the visitor's email client instead of capturing on-page. Real version: an on-page form posting to a Cloudflare Pages Function with KV (or D1) storage + Turnstile spam protection, scoped per product. Shelved until a product is closer to real. (2026-06-10)
+
 ## Operational
 
 - **Stop Doing list against the site.** Apply the $150/hr filter to every section. Anything that doesn't either advance M1 (100M DIDs) or feed the newsletter is a candidate for cut. (2026-05-15)
