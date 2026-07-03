@@ -101,3 +101,4 @@ Background: see `~/.claude/PAI/MEMORY/WORK/site-stop-doing-filter/ISA.md` for th
 - **Bun, not npm.** Zero exceptions.
 - **`public/` is served at site root** — anything in there ships verbatim. Don't dump build output there; that's `dist/`.
 - **`dist/` and `.astro/` are gitignored.** Never commit either.
+- **Push auth: this repo needs the `andywoodruff6` gh account.** `origin` is `github.com/andywoodruff6/personal-website`. If the active `gh` account is `andy-ocme` (common default), `git push` 403s (`Permission denied to andy-ocme`). SSH has no key configured. Fix: `gh auth switch --user andywoodruff6` → `git push origin main` → `gh auth switch --user andy-ocme` (restore). `/deploy` doesn't do this for you.
