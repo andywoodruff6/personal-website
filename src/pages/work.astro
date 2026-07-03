@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Redacted PRD exhibit — excerpts from an internal OCME product spec (OCME Specs MCP).
+// Redaction rule: NO auth / authorization / security-model content (no OAuth, roles,
+// fail-closed middleware, secrets, data-access tiers). Structural + product-thinking
+// excerpts only. Each block tagged with the PO competency it demonstrates.
+const acceptanceCriteria = [
+  '`check_functional_spec <id>` returns exactly one row — the current version — from the materialized current-spec table.',
+  'The returned rule includes the atomic-rule fields: functional_definition, acceptance_criteria, anti_scope.',
+  '`get_archive <id>` returns the prior version rows for that spec, ordered by version / effective_date.',
+  'Anti: the read path NEVER returns a superseded version, and never more than one current row for a given spec.',
+];
+const testRows = [
+  ['Serve one current row', 'call on a seeded spec; assert exactly one current row', 'integration'],
+  ['Atomic-rule fields', 'assert response carries definition + acceptance + anti-scope', 'integration'],
+  ['Archive retrieval', 'spec with ≥2 versions returns prior versions in order', 'integration'],
+  ['Anti: no stale reads', 'spec with archived versions returns 0 archived in current path', 'integration (anti)'],
+];
+---
+
+<Base
+  title="Work"
+  description="Andy Woodruff — AI-native product leadership. A point of view, three case studies, and a work sample from someone who ships."
+>
+  <section class="work-hero">
+    <h1>Work</h1>
+    <p class="work-lede">
+      I turn ambiguous problems into shipped products — across hardware and software, in
+      enterprises and startups, and now in AI-native teams where the product owner's job is
+      changing fast. Here's the point of view, the track record, and a work sample.
+    </p>
+  </section>
+
+  <!-- Spike: one sharp thesis -->
+  <section class="work-section">
+    <h2 class="work-label"><span class="work-num">01</span> Point of view</h2>
+    <div class="work-spike">
+      <h3><a href="/ideas/product-owner-context-master/">What Does a Product Owner Look Like in the Age of AI?</a></h3>
+      <p>
+        The four primitives of any AI system are the model, the prompt, the tools — and
+        <em>context</em>. Context is the one primitive shared across every role, and someone has
+        to own it. That's the product owner: not a knowledge <em>holder</em> but a knowledge
+        <em>curator</em>, governing the pool of decisions, constraints, and history the whole
+        team's agents build against. Own the context, own the product.
+      </p>
+      <p class="work-spike-more"><a href="/ideas/product-owner-context-master/">Read the essay →</a></p>
+    </div>
+  </section>
+
+  <!-- Case studies: problem → action → result, qualitative -->
+  <section class="work-section">
+    <h2 class="work-label"><span class="work-num">02</span> Case studies</h2>
+
+    <article class="work-case">
+      <h3>Cubicube Prompt Analyzer</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Creator-site content pipelines needed prompt and content classified reliably — misclassification showed up downstream as cost-of-goods variance.</dd>
+        <dt>Action</dt>
+        <dd>As product owner across the engineering team, I specced and shipped a Prompt Analyzer that classifies content for the Cubicube creator sites, with a clear definition of done and acceptance criteria.</dd>
+        <dt>Result</dt>
+        <dd>Shipped to production with a strong classification-accuracy rate and an improved net cost-of-goods variance — the analyzer earned its keep in reduced waste.</dd>
+      </dl>
+    </article>
+
+    <article class="work-case">
+      <h3>Alliant Energy · IBM Maximo deployment</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>A large utility needed to embed IBM Maximo into daily operations across a cross-functional organization and its sub-teams — a complex enterprise rollout with real budget exposure.</dd>
+        <dt>Action</dt>
+        <dd>Led the strategic deployment as project manager, running structured risk and issue management, assigning benefit owners in every meeting, and driving program-wide retrospectives.</dd>
+        <dt>Result</dt>
+        <dd>Delivered substantial recurring operational savings, materially reduced budget overruns, and embedded the platform into routine operations across the organization.</dd>
+      </dl>
+    </article>
+
+    <article class="work-case">
+      <h3>Meeting-transcript automation</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Turning raw meeting transcripts into structured notes and per-attendee follow-ups was slow, manual, and inconsistent.</dd>
+        <dt>Action</dt>
+        <dd>Built an AI automation that ingests a transcript and produces structured meeting notes plus per-person updates — one of 15+ custom agents I've built to run OCME's operations.</dd>
+        <dt>Result</dt>
+        <dd>Collapsed a manual multi-step task to near-instant, freeing leadership time for higher-value work and giving the team a consistent record every time.</dd>
+      </dl>
+    </article>
+  </section>
+
+  <!-- Fourth exhibit: redacted PRD work-sample -->
+  <section class="work-section">
+    <h2 class="work-label"><span class="work-num">03</span> Work sample — an internal product spec</h2>
+    <p class="work-sample-intro">
+      A redacted excerpt from a product spec I wrote for an internal OCME tool (a spec-as-database
+      MCP server). Security and access-model sections are removed; what's left shows how I frame a
+      problem, hold scope, and write testable acceptance criteria. Structured on twelve fixed
+      sections — problem, vision, out-of-scope, principles, constraints, goal, criteria, tests,
+      and a decision log.
+    </p>
+
+    <div class="work-exhibit">
+      <span class="work-tag">Problem framing</span>
+      <blockquote>
+        Specifications written as prose are designed for <em>humans</em>. In the era of agentic
+        engineering, specs need to be written for <em>agents</em>. When a coding agent reads prose,
+        it has no reliable way to know which statement is current and authoritative — so it makes
+        <em>stale pulls</em> (a superseded decision returned as co-equal), <em>wrong-section pulls</em>
+        (the same feature described in several places, blended), and <em>read-time re-derivation</em>
+        (intent re-inferred, and re-misread, on every read).
+      </blockquote>
+    </div>
+
+    <div class="work-exhibit">
+      <span class="work-tag">Scope discipline (anti-scope)</span>
+      <p>Deliberately <strong>not</strong>:</p>
+      <ul>
+        <li>A project / issue tracker — it backlinks to execution but never owns tasks or status.</li>
+        <li>The meeting or authoring tool — it serves only the <em>approved</em> record.</li>
+        <li>A drafting assistant for new specs — authoring assistance is out of the tool entirely.</li>
+        <li>A prose doc renderer — the structured record is the source of truth, no prose mirror.</li>
+        <li>A general knowledge base — it governs functional specs only, not runbooks or notes.</li>
+      </ul>
+    </div>
+
+    <div class="work-exhibit">
+      <span class="work-tag">Acceptance criteria authoring</span>
+      <ul class="work-criteria">
+        {acceptanceCriteria.map((c) => <li set:html={c.replace(/`([^`]+)`/g, '<code>$1</code>')} />)}
+      </ul>
+    </div>
+
+    <div class="work-exhibit">
+      <span class="work-tag">Architectural decision record</span>
+      <blockquote>
+        <strong>Storage: git-authored YAML as the source of truth, a derived read-projection as
+        the serving layer</strong> — not the database as primary, not files as the serving layer.
+        Two independent design reviews converged on it; the deciding factor was audit and review,
+        not scale. The projection is a pure function of the approved commit, so the served record
+        can never silently drift from what was reviewed and merged.
+      </blockquote>
+    </div>
+
+    <div class="work-exhibit">
+      <span class="work-tag">Test strategy / definition of done</span>
+      <div class="work-table-wrap">
+        <table class="work-table">
+          <thead><tr><th>Check</th><th>How</th><th>Type</th></tr></thead>
+          <tbody>
+            {testRows.map((r) => (
+              <tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials -->
+  <section class="work-section">
+    <h2 class="work-label"><span class="work-num">04</span> Credentials</h2>
+    <ul class="work-creds">
+      <li>PMP — Project Management Professional (PMI)</li>
+      <li>Six Sigma Green Belt</li>
+      <li>BS, Mechanical Engineering — Ohio Northern University</li>
+      <li>Trust over IP (Linux Foundation) — Human Experience WG co-chair</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section class="work-section work-contact">
+    <p>
+      Building something where this fits? <a href="mailto:andy@ocmeco.org?subject=Work%20inquiry">Email me →</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .work-hero { margin-bottom: var(--space-4); }
+  .work-lede {
+    font-size: var(--fs-h3);
+    line-height: 1.5;
+    max-width: 42rem;
+    color: var(--color-text);
+  }
+  .work-section { margin-top: var(--space-5); }
+  .work-label {
+    font-size: var(--fs-h3);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--color-rule);
+    padding-bottom: 0.4rem;
+  }
+  .work-num { font-family: var(--font-mono); color: var(--color-accent); margin-right: 0.5rem; }
+
+  .work-spike h3 { margin: 0.6rem 0 0.4rem; }
+  .work-spike-more { font-family: var(--font-mono); font-size: var(--fs-mono-sm); }
+
+  .work-case {
+    border: 1px solid var(--color-rule);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    background: var(--color-bg-2);
+  }
+  .work-case h3 { margin: 0 0 0.6rem; }
+  .work-case dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; }
+  .work-case dt {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    padding-top: 0.15rem;
+  }
+  .work-case dd { margin: 0; }
+
+  .work-sample-intro { max-width: 44rem; color: var(--color-muted); }
+  .work-exhibit {
+    border-left: 3px solid var(--color-accent);
+    padding: 0.5rem 0 0.5rem 1rem;
+    margin-top: 1.25rem;
+  }
+  .work-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+  }
+  .work-exhibit blockquote { margin: 0; font-style: normal; }
+  .work-criteria, .work-exhibit ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+  .work-criteria li { margin-bottom: 0.35rem; }
+  .work-criteria code, .work-exhibit code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-code-bg);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+  }
+  .work-table-wrap { overflow-x: auto; margin-top: 0.5rem; }
+  .work-table { border-collapse: collapse; width: 100%; font-size: var(--fs-mono-sm); }
+  .work-table th, .work-table td {
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--color-rule);
+    vertical-align: top;
+  }
+  .work-table th { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-caps); font-size: var(--fs-mono-xs); }
+
+  .work-creds { list-style: none; padding: 0; margin: 0.75rem 0 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .work-creds li {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-sm);
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-accent);
+  }
+
+  .work-contact { border-top: 1px solid var(--color-rule); padding-top: 1.25rem; }
+  .work-contact p { font-size: var(--fs-h3); }
+</style>
