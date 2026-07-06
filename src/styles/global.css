@@ -488,7 +488,6 @@ body[data-nav-open] .nav-toggle-icon-close { display: block; }
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  flex-wrap: wrap;
   margin-bottom: 0.3rem;
 }
 .entry-role {
@@ -502,6 +501,8 @@ body[data-nav-open] .nav-toggle-icon-close { display: block; }
   flex-shrink: 0;
 }
 .entry-title {
+  flex: 1 1 auto;
+  min-width: 0;
   font-family: var(--font-sans);
   font-size: 1.2rem;
   font-weight: 600;

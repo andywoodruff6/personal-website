@@ -48,43 +48,51 @@ const testRows = [
     </div>
   </section>
 
-  <!-- Case studies: problem → action → result, qualitative -->
+  <!-- Case studies: three proofs of one claim — judgment → build → scale -->
   <section class="work-section">
     <h2 class="work-label"><span class="work-num">02</span> Case studies</h2>
+    <p class="work-cases-lede">
+      Three proofs of one claim — that owning the context is the job:
+      <strong>judgment</strong> on an AI product, <strong>building</strong> the agents myself,
+      and <strong>governing</strong> a complex decision-context at enterprise scale.
+    </p>
 
     <article class="work-case">
-      <h3>Cubicube Prompt Analyzer</h3>
+      <span class="work-tag">Judgment</span>
+      <h3>Nexartis · Cubicube Build Prompt Analyzer</h3>
       <dl>
         <dt>Problem</dt>
-        <dd>Creator-site content pipelines needed prompt and content classified reliably — misclassification showed up downstream as cost-of-goods variance.</dd>
+        <dd>Variance in cost of agentic website building tools is a pain point for our target user, creators who are not technical. We needed a way to classify their prompt based on four build tiers (tweak, small, large, complex). Solving this not only made it clearer to the user what they will be charged, but allowed us to have a more accurate cost of goods sold.</dd>
         <dt>Action</dt>
-        <dd>As product owner across the engineering team, I specced and shipped a Prompt Analyzer that classifies content for the Cubicube creator sites, with a clear definition of done and acceptance criteria.</dd>
+        <dd>I identified this as a piece of critical technology as it impacts customer satisfaction as well as our cost of goods sold, so extra time was spent scoping out this feature. How it will work and how it would integrate into the rest of the build flow. We dedicated several working sessions to the customer journey and several to the technical flow. In order to improve the accuracy of our rubric, I constructed a recursive reinforced learning loop, allowing the LLM to tweak its rubric, comparing test results to the previous best in search of improvements.</dd>
         <dt>Result</dt>
-        <dd>Shipped to production with a strong classification-accuracy rate and an improved net cost-of-goods variance — the analyzer earned its keep in reduced waste.</dd>
+        <dd>The classifier was bundled into the 1.0 release which shipped to production in June of 2026. At release the classifier met our accuracy threshold with a normalized distribution centered on 0 (meaning we were not over or undercharging on average when we miscalculated). The Prompt Analyzer continues to be refined at regular intervals as new data comes in.</dd>
       </dl>
     </article>
 
     <article class="work-case">
-      <h3>Alliant Energy · IBM Maximo deployment</h3>
-      <dl>
-        <dt>Problem</dt>
-        <dd>A large utility needed to embed IBM Maximo into daily operations across a cross-functional organization and its sub-teams — a complex enterprise rollout with real budget exposure.</dd>
-        <dt>Action</dt>
-        <dd>Led the strategic deployment as project manager, running structured risk and issue management, assigning benefit owners in every meeting, and driving program-wide retrospectives.</dd>
-        <dt>Result</dt>
-        <dd>Delivered substantial recurring operational savings, materially reduced budget overruns, and embedded the platform into routine operations across the organization.</dd>
-      </dl>
-    </article>
-
-    <article class="work-case">
+      <span class="work-tag">Build</span>
       <h3>Meeting-transcript automation</h3>
       <dl>
         <dt>Problem</dt>
         <dd>Turning raw meeting transcripts into structured notes and per-attendee follow-ups was slow, manual, and inconsistent.</dd>
         <dt>Action</dt>
-        <dd>Built an AI automation that ingests a transcript and produces structured meeting notes plus per-person updates — one of 15+ custom agents I've built to run OCME's operations.</dd>
+        <dd>I built the AI automation myself — it ingests a transcript and produces structured notes plus per-person updates — one of 15+ custom agents I've built to run OCME's operations.</dd>
         <dt>Result</dt>
-        <dd>Collapsed a manual multi-step task to near-instant, freeing leadership time for higher-value work and giving the team a consistent record every time.</dd>
+        <dd>Collapsed a manual multi-step task to near-instant, freeing leadership time and giving the team a consistent record every time. I don't just spec the agents; I ship them.</dd>
+      </dl>
+    </article>
+
+    <article class="work-case">
+      <span class="work-tag">Scale</span>
+      <h3>Alliant Energy · IBM Maximo deployment</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>A large utility needed IBM Maximo embedded into daily operations across a cross-functional organization and its sub-teams — many stakeholders, competing decisions, real budget exposure.</dd>
+        <dt>Action</dt>
+        <dd>As project manager I governed that context at scale: structured risk and issue management, a named benefit owner in every meeting, and program-wide retrospectives keeping every sub-team aligned to one record.</dd>
+        <dt>Result</dt>
+        <dd>Delivered substantial recurring operational savings, materially reduced budget overruns, and embedded the platform into routine operations org-wide — the same muscle, owning the context, one enterprise before the AI era made it a title.</dd>
       </dl>
     </article>
   </section>
@@ -196,6 +204,8 @@ const testRows = [
 
   .work-spike h3 { margin: 0.6rem 0 0.4rem; }
   .work-spike-more { font-family: var(--font-mono); font-size: var(--fs-mono-sm); }
+
+  .work-cases-lede { max-width: 44rem; margin-top: 0.75rem; color: var(--color-text); }
 
   .work-case {
     border: 1px solid var(--color-rule);

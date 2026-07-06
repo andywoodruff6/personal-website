@@ -94,7 +94,7 @@ Some sections are deliberately dormant — they stay live but earn no new effort
 - `src/content/projects/open-commercial-media-ecosystem.md` and `trust-over-ip.md`
 - `src/pages/index.astro`, `src/pages/about.astro`
 
-Background: see `~/.claude/PAI/MEMORY/WORK/site-stop-doing-filter/ISA.md` for the full pass.
+Background: this posture came out of a full $150/hr-or-M1-or-newsletter pass over the site (May 2026).
 
 ## Gotchas
 
