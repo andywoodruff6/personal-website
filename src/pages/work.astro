@@ -75,11 +75,11 @@ const testRows = [
       <h3>Meeting-transcript automation</h3>
       <dl>
         <dt>Problem</dt>
-        <dd>Turning raw meeting transcripts into structured notes and per-attendee follow-ups was slow, manual, and inconsistent.</dd>
+        <dd>Important decisions get made, and action items get assigned, yet without quality meeting notes it's inevitable that people forget them. I needed a tool that took meeting notes, assigning action items to specific individuals, recording decisions and capturing conversations.</dd>
         <dt>Action</dt>
-        <dd>I built the AI automation myself — it ingests a transcript and produces structured notes plus per-person updates — one of 15+ custom agents I've built to run OCME's operations.</dd>
+        <dd>I built the AI automation myself. All of my meetings use the following automated workflow: Meetings are recorded and then transcribed locally. From there, a project-manager agent I built reads the transcript and produces structured notes — capturing every decision and assigning each action item to the person who owns it — then updates each attendee's record automatically. The only thing I touch is a quick confirmation that the speaker names mapped correctly; the raw transcript is filed into a searchable store I can pull from later.</dd>
         <dt>Result</dt>
-        <dd>Collapsed a manual multi-step task to near-instant, freeing leadership time and giving the team a consistent record every time. I don't just spec the agents; I ship them.</dd>
+        <dd>With this in place, I walk away from a meeting and the follow-up is already handled — notes written, decisions logged, and each person's action items waiting for them. Nothing falls through the cracks the way it used to, and I get my attention back for the work that actually needs me. I didn't just spec the tooling that made this happen — I built and shipped them.</dd>
       </dl>
     </article>
 
@@ -88,11 +88,11 @@ const testRows = [
       <h3>Alliant Energy · IBM Maximo deployment</h3>
       <dl>
         <dt>Problem</dt>
-        <dd>A large utility needed IBM Maximo embedded into daily operations across a cross-functional organization and its sub-teams — many stakeholders, competing decisions, real budget exposure.</dd>
+        <dd>A large utility was rolling out IBM Maximo — a new enterprise asset-management platform — and needed it embedded into the daily operations of a cross-functional organization split across six sub-teams. The rollout carried real budget exposure and no shortage of competing priorities: every sub-team had its own dependencies, its own risks, and its own definition of "done." Someone had to hold the whole picture.</dd>
         <dt>Action</dt>
-        <dd>As project manager I governed that context at scale: structured risk and issue management, a named benefit owner in every meeting, and program-wide retrospectives keeping every sub-team aligned to one record.</dd>
+        <dd>As the project manager, I owned that context end-to-end. I ran structured risk and issue management in Jira — surfacing dependencies early, escalating them before they became blockers, and driving each to resolution. In every meeting I assigned a named owner to each benefit so accountability never blurred, and I ran team-wide and program-wide retrospectives that kept all six sub-teams aligned to a single source of truth.</dd>
         <dt>Result</dt>
-        <dd>Delivered substantial recurring operational savings, materially reduced budget overruns, and embedded the platform into routine operations org-wide — the same muscle, owning the context, one enterprise before the AI era made it a title.</dd>
+        <dd>The platform landed in routine operations across the whole organization, with materially fewer budget overruns and substantial recurring operational savings to show for it — and by tightening the release cadence we clawed back weeks on a major bundle. It's the same muscle I use today: owning the context so a complex, multi-stakeholder effort moves as one. This was just one enterprise, before the AI era made owning the context a job title.</dd>
       </dl>
     </article>
   </section>
@@ -101,23 +101,23 @@ const testRows = [
   <section class="work-section">
     <h2 class="work-label"><span class="work-num">03</span> Work sample — an internal product spec</h2>
     <p class="work-sample-intro">
-      A redacted excerpt from a product spec I wrote for an internal OCME tool (a spec-as-database
-      MCP server). Security and access-model sections are removed; what's left shows how I frame a
-      problem, hold scope, and write testable acceptance criteria. Structured on twelve fixed
-      sections — problem, vision, out-of-scope, principles, constraints, goal, criteria, tests,
-      and a decision log.
+      A public sample of an internal PRD I built — the product spec for an OCME tool (a
+      spec-as-database MCP server). It leaves out the security and access-model details, but what's
+      here shows how I frame a problem, hold scope, and write testable acceptance criteria. The full
+      spec is structured on twelve fixed sections — problem, vision, out-of-scope, principles,
+      constraints, goal, criteria, tests, and a decision log.
     </p>
 
     <div class="work-exhibit">
       <span class="work-tag">Problem framing</span>
-      <blockquote>
+      <p>
         Specifications written as prose are designed for <em>humans</em>. In the era of agentic
         engineering, specs need to be written for <em>agents</em>. When a coding agent reads prose,
         it has no reliable way to know which statement is current and authoritative — so it makes
         <em>stale pulls</em> (a superseded decision returned as co-equal), <em>wrong-section pulls</em>
         (the same feature described in several places, blended), and <em>read-time re-derivation</em>
         (intent re-inferred, and re-misread, on every read).
-      </blockquote>
+      </p>
     </div>
 
     <div class="work-exhibit">
@@ -141,13 +141,13 @@ const testRows = [
 
     <div class="work-exhibit">
       <span class="work-tag">Architectural decision record</span>
-      <blockquote>
+      <p>
         <strong>Storage: git-authored YAML as the source of truth, a derived read-projection as
         the serving layer</strong> — not the database as primary, not files as the serving layer.
         Two independent design reviews converged on it; the deciding factor was audit and review,
         not scale. The projection is a pure function of the approved commit, so the served record
         can never silently drift from what was reviewed and merged.
-      </blockquote>
+      </p>
     </div>
 
     <div class="work-exhibit">
@@ -226,7 +226,7 @@ const testRows = [
   }
   .work-case dd { margin: 0; }
 
-  .work-sample-intro { max-width: 44rem; color: var(--color-muted); }
+  .work-sample-intro { max-width: 44rem; color: var(--color-text); }
   .work-exhibit {
     border-left: 3px solid var(--color-accent);
     padding: 0.5rem 0 0.5rem 1rem;
@@ -244,7 +244,6 @@ const testRows = [
     border-radius: 999px;
     margin-bottom: 0.5rem;
   }
-  .work-exhibit blockquote { margin: 0; font-style: normal; }
   .work-criteria, .work-exhibit ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
   .work-criteria li { margin-bottom: 0.35rem; }
   .work-criteria code, .work-exhibit code {
