@@ -4,14 +4,14 @@ Guidance for Claude Code working in this repo. Stack and commands are documented
 
 ## Project Overview
 
-Andy Woodruff's personal site at [andywoodruff.net](https://andywoodruff.net). Astro static site, deployed via Cloudflare Pages on push to `main`.
+Andy Woodruff's personal site at [andywoodruff.net](https://andywoodruff.net). Astro static site, deployed to a Cloudflare Worker (static assets) via `bunx wrangler deploy` (use the `/deploy` command). **Deploy is decoupled from git** — pushing to `main` does NOT deploy.
 
 ## Stack
 
 - **Astro 5** — static site generator, content collections, MDX
 - **Bun** — package manager and runtime (never npm/npx)
 - **TypeScript** — `astro check` for typechecking
-- **Cloudflare Pages** — auto-deploys from `main`
+- **Cloudflare Worker (static assets)** — deploy via `bunx wrangler deploy` / `/deploy`; git push does NOT deploy
 
 Canonical commands (from README.md):
 
@@ -101,4 +101,4 @@ Background: this posture came out of a full $150/hr-or-M1-or-newsletter pass ove
 - **Bun, not npm.** Zero exceptions.
 - **`public/` is served at site root** — anything in there ships verbatim. Don't dump build output there; that's `dist/`.
 - **`dist/` and `.astro/` are gitignored.** Never commit either.
-- **Push auth: this repo needs the `andywoodruff6` gh account.** `origin` is `github.com/andywoodruff6/personal-website`. If the active `gh` account is `andy-ocme` (common default), `git push` 403s (`Permission denied to andy-ocme`). SSH has no key configured. Fix: `gh auth switch --user andywoodruff6` → `git push origin main` → `gh auth switch --user andy-ocme` (restore). `/deploy` doesn't do this for you.
+- **Push auth: this repo needs the `andywoodruff6` gh account.** `origin` is `github.com/andywoodruff6/personal-website`. If the active `gh` account is `andy-ocme` (common default), `git push` 403s (`Permission denied to andy-ocme`). SSH has no key configured. Fix: `gh auth switch --user andywoodruff6` → `git push origin main` → `gh auth switch --user andy-ocme` (restore). The `/deploy` command now performs this switch/restore for you; only do it by hand for a manual `git push`.

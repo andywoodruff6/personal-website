@@ -1,6 +1,6 @@
 # Andy Woodruff
 
-Personal site for [andywoodruff.net](https://andywoodruff.net). Built with Astro, deployed via Cloudflare Pages.
+Personal site for [andywoodruff.net](https://andywoodruff.net). Built with Astro, deployed to a Cloudflare Worker (static assets) via `wrangler` / the `/deploy` command.
 
 ## Local Development
 
@@ -42,21 +42,17 @@ public/
 
 Drop a markdown file into `src/content/{collection}/`. Frontmatter is type-checked at build time per the schemas in `src/content.config.ts`. Required: `title`. Optional: `date`, `description`, `tags` (max 5 per [TAGS.md](TAGS.md)), `cover`, `draft`.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Worker — static assets)
 
-The repo is connected to Cloudflare Pages. Push to `main` deploys production; push to any other branch creates a preview deployment at `<branch>.<project>.pages.dev`.
+**Deploy and source control are decoupled.** `git push` records source only — it does **not** deploy. Deploys are explicit, via `wrangler`:
 
-**Build settings (configured in CF Pages dashboard):**
+```
+bunx wrangler deploy    # builds are separate — run `bun run build` first
+```
 
-| Setting | Value |
-|---|---|
-| Framework preset | Astro |
-| Build command | `bun run build` |
-| Build output directory | `dist` |
-| Root directory | `/` |
-| Node version (env var `NODE_VERSION`) | `22` or higher |
+This uploads `dist/` as static assets to the `andywoodruff6` Cloudflare Worker (config in [`wrangler.jsonc`](wrangler.jsonc)); `andywoodruff.net` goes live within seconds. In practice, use the **`/deploy`** Claude command, which bundles version-bump → build → `wrangler deploy` → live-verify → commit → push.
 
-If CF Pages does not natively support `bun`, set the build command to `npm install -g bun && bun install && bun run build`.
+> History: this was a git-connected Cloudflare **Pages** project until Cloudflare's Workers-Builds migration (July 2026) broke its auto-build. The project is now a Worker with static assets, deployed manually via `wrangler`; the GitHub build trigger is disconnected so pushes never auto-deploy.
 
 ## Content Guidelines
 

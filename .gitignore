@@ -20,10 +20,8 @@ Thumbs.db
 *.swp
 *.swo
 
-# Legacy Hugo strays
-/resources/_gen/
-hugo_stats.json
-.hugo_build.lock
+# Wrangler
+.wrangler/
 
 # Claude Code project-local state
 .claude/
