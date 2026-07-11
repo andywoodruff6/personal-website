@@ -8,7 +8,8 @@ description: A FastMCP server for Madison-area endurance athletes — race disco
 cover: /images/madison-endurance-mcp.jpg
 link: https://github.com/andywoodruff6/mes-mcp-server
 tags: ['mcp', 'fastmcp', 'building']
-featured: false
+featured: true
+order: 1
 ---
 
 > A Model Context Protocol server that joins race discovery, NWS race-day weather, and recurring group rides into one slash-command surface for Madison-area endurance athletes.
