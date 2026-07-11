@@ -37,19 +37,19 @@
   --tracking-caps:       0.04em;
   --tracking-caps-wide:  0.06em;
 
-  /* Flexoki light — paper + ink */
-  --color-bg:       #FFFCF0;
-  --color-bg-2:     #F2E9DA;
-  --color-muted:    #6F6E69;
-  --color-rule:     #CECDC3;
-  --color-text:     #100F0F;
+  /* Badger Slate light — cool neutral surface, single badger accent */
+  --color-bg:       #FAFBFC;
+  --color-bg-2:     #EEF1F4;
+  --color-muted:    #5B6472;  /* 5.8:1 on bg */
+  --color-rule:     #D8DDE3;
+  --color-text:     #101828;  /* deep navy-slate, 17.1:1 */
 
-  /* Action colors */
-  --color-accent:   #DA702C;  /* Flexoki orange — matches badger */
-  --color-link:     #24837B;  /* Flexoki cyan */
-  --color-signal:   #5E409D;  /* Flexoki purple — "currently / live" */
+  /* Action colors — one accent (badger orange), links in the same family */
+  --color-accent:   #DA702C;  /* badger orange — buttons, hovers, marks */
+  --color-link:     #B84E12;  /* darker badger for text-size links, 4.9:1 AA */
+  --color-signal:   #3E5C82;  /* steel — "currently / live" (purple retired) */
 
-  --color-code-bg:  #F2E9DA;
+  --color-code-bg:  #F1F3F5;
 
   /* Type — IBM Plex family, system fallbacks tuned to match */
   --font-mono:  'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -78,15 +78,15 @@
    no explicit choice has been made. The inline script in Base.astro sets
    data-theme on first paint to prevent FOUC. */
 [data-theme='dark'] {
-  --color-bg:      #100F0F;
-  --color-bg-2:    #1C1B1A;
-  --color-text:    #CECDC3;
-  --color-muted:   #878580;
-  --color-rule:    #282726;
-  --color-accent:  #DA702C;
-  --color-link:    #3AA99F;
-  --color-signal:  #8B7EC8;
-  --color-code-bg: #1C1B1A;
+  --color-bg:      #0D1420;
+  --color-bg-2:    #16202E;
+  --color-text:    #D3DAE3;  /* 13.1:1 */
+  --color-muted:   #8B95A3;  /* 6.1:1 */
+  --color-rule:    #24303F;
+  --color-accent:  #E8823C;  /* brightened badger, 6.8:1 */
+  --color-link:    #E8823C;
+  --color-signal:  #7FA3D0;
+  --color-code-bg: #16202E;
 }
 
 * { box-sizing: border-box; }
