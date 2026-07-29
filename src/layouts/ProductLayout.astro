@@ -37,8 +37,9 @@ const heroImages = cover ? [cover, ...gallery.filter((g) => g !== cover)] : gall
 
     {heroImages.length > 0 && (
       <div class="product-gallery">
-        {heroImages.map((img) => (
-          <img src={img} alt={title} loading="lazy" />
+        {/* First image is the above-the-fold hero (the LCP element) — never lazy. */}
+        {heroImages.map((img, i) => (
+          <img src={img} alt={title} loading={i === 0 ? 'eager' : 'lazy'} />
         ))}
       </div>
     )}
@@ -117,11 +118,17 @@ const heroImages = cover ? [cover, ...gallery.filter((g) => g !== cover)] : gall
   .product-gallery img {
     width: 100%;
     border-radius: 10px;
-    border: 1px solid var(--color-rule);
+    border: 3px solid var(--color-shot-frame);
     display: block;
   }
 
   .product-body {
     max-width: var(--measure);
+  }
+  /* Same frame as the gallery — in-prose screenshots need the defined edge for
+     the same reason (warm shot ground against a cool page surface). */
+  .product-body :global(img) {
+    border-radius: 10px;
+    border: 3px solid var(--color-shot-frame);
   }
 </style>

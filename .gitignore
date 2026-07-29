@@ -25,3 +25,6 @@ Thumbs.db
 
 # Claude Code project-local state
 .claude/
+
+# Interceptor writes captures to CWD when --out is omitted
+interceptor-screenshot-*.png

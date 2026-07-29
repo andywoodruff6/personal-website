@@ -51,6 +51,12 @@
 
   --color-code-bg:  #F1F3F5;
 
+  /* Screenshot frame. Product shots ship a warm paper ground (#FFFCF0) that
+     sits on cool grey surfaces; without a defined edge the warm near-white
+     reads as dingy. A border a few steps darker than --color-rule gives the
+     shot a hard edge so it reads as a framed screen, not a mismatched patch. */
+  --color-shot-frame: #A6B0BD;
+
   /* Type — IBM Plex family, system fallbacks tuned to match */
   --font-mono:  'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --font-sans:  'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -87,6 +93,10 @@
   --color-link:    #E8823C;
   --color-signal:  #7FA3D0;
   --color-code-bg: #16202E;
+
+  /* Dark mode already reads the cream as a lit screen; the frame just needs to
+     stay visible against the panel rather than fight it. */
+  --color-shot-frame: #33404F;
 }
 
 * { box-sizing: border-box; }
