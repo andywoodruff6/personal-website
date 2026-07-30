@@ -2,17 +2,17 @@
 date: '2025-08-20'
 draft: false
 order: 1
-role: 'Leading'
+role: 'Founding Executive Director, 2025–2026'
 link: 'https://ocmeco.org'
 title: 'Open Commercial Media Ecosystem'
-description: "The member-governed ecosystem rebuilding the creator economy with cryptographically secure identity at the foundation. I'm the Executive Director."
+description: "The member-governed ecosystem rebuilding the creator economy with cryptographically secure identity at the foundation. I was founding Executive Director, 2025–2026."
 tags: [projects, identity, business]
 cover: '/images/ocme-banner.png'
 ---
 
-I'm the **Executive Director** of the [Open Commercial Media Ecosystem (OCME)](https://ocmeco.org), a 501(c)(6) member-governed nonprofit rebuilding the creator economy on top of cryptographically secure, tamper-evident identity.
+I was the **founding Executive Director** (2025–2026) of the [Open Commercial Media Ecosystem (OCME)](https://ocmeco.org), a 501(c)(6) member-governed nonprofit rebuilding the creator economy on top of cryptographically secure, tamper-evident identity.
 
-I went full-time on August 20, 2025. OCME is the operational expression of my first mission — bringing self-sovereign identity (SSI) technology to **100 million people by 2034** — and the engine of my second — restoring economic agency to creators and professionals through alternatives to gatekeeper-controlled platforms.
+I went full-time on August 20, 2025, and stepped down in July 2026, handing the ecosystem to its next leadership. OCME is the operational expression of my first mission — bringing self-sovereign identity (SSI) technology to **100 million people by 2034** — and the engine of my second — restoring economic agency to creators and professionals through alternatives to gatekeeper-controlled platforms.
 
 ## Why OCME exists
 

@@ -12,7 +12,7 @@ interface Props {
 const { title, description, ogImage } = Astro.props;
 const siteTitle = 'Andy Woodruff';
 const siteTagline =
-  'Andy Woodruff — Executive Director of OCME. Writing on self-sovereign identity, creator-governed ecosystems, and the Human 3.0 transition.';
+  'Andy Woodruff — product leader and builder. Writing on ownership, agency, and trust: self-sovereign identity, creator-governed ecosystems, and the Human 3.0 transition.';
 const newsletterName = 'The Shifting Current';
 const author = siteTitle;
 const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
@@ -27,8 +27,8 @@ const personJsonLd = {
   '@type': 'Person',
   name: 'Andy Woodruff',
   url: siteUrl,
-  jobTitle: 'Executive Director, Open Commercial Media Ecosystem',
-  worksFor: {
+  jobTitle: 'Product Leader & Builder',
+  alumniOf: {
     '@type': 'Organization',
     name: 'Open Commercial Media Ecosystem',
     url: 'https://ocmeco.org',
@@ -106,7 +106,7 @@ const websiteJsonLd = {
           <BadgerLogo size={36} class="brand-mark" />
           <span class="brand-text">
             Andy Woodruff
-            <span class="brand-role">Executive Director · OCME</span>
+            <span class="brand-role">Product Leader · Builder</span>
           </span>
         </a>
         <button

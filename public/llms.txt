@@ -1,6 +1,6 @@
 # The Shifting Current
 
-> Personal website of Andy Woodruff. Andy is the Executive Director of the Open Commercial Media Ecosystem (OCME), co-chair of the Human Experience Working Group at the Trust over IP Foundation, and a PMP-certified product owner and project manager with a mechanical engineering degree. The Shifting Current explores AI economics, personal AI infrastructure, creator-governed content, and predictions about technological transformation. Andy's thesis: intelligence costs have dropped 833x and are still falling, creating a once-in-a-generation opportunity for individuals who learn to leverage AI tools now.
+> Personal website of Andy Woodruff. Andy is a product leader and builder — founding Executive Director of the Open Commercial Media Ecosystem (OCME, 2025–2026), former co-chair of the Human Experience Working Group at the Trust over IP Foundation, and a PMP-certified product owner and project manager with a mechanical engineering degree. The Shifting Current explores AI economics, personal AI infrastructure, creator-governed content, and predictions about technological transformation. Andy's thesis: intelligence costs have dropped 833x and are still falling, creating a once-in-a-generation opportunity for individuals who learn to leverage AI tools now.
 
 The site covers four content pillars: Technology as Liberation (AI economics, agentic AI, personal AI workflows), Conscious Curation (book reviews and key insights), Predictions (structured, tracked predictions with likelihood scores), and Autonomy Reclamation (creator governance, decentralized identity, new economic models). Andy also offers AI workspace setup consulting — five workflows installed and configured in a single session.
 
@@ -25,7 +25,7 @@ The site covers four content pillars: Technology as Liberation (AI economics, ag
 
 ## Projects
 
-- [Open Commercial Media Ecosystem](https://andywoodruff.net/projects/open_commercial_media_ecosystem/): Andy serves as Executive Director of OCME, a 501(c)(6) non-profit creator ecosystem with 600+ members, 6,000+ content pieces, and creator-governed content model.
+- [Open Commercial Media Ecosystem](https://andywoodruff.net/projects/open_commercial_media_ecosystem/): Andy founded and led OCME as Executive Director (2025–2026), a 501(c)(6) non-profit creator ecosystem with 600+ members, 6,000+ content pieces, and creator-governed content model.
 - [Trust over IP](https://andywoodruff.net/projects/trust_over_ip/): Andy co-chairs the Human Experience Working Group at this Linux Foundation project building standards for digital trust and decentralized identity.
 - [The Shifting Current](https://andywoodruff.net/projects/the-shifting-current/): This blog — the primary expression of Andy's mission to build awareness of the transition to a new world view.
 
