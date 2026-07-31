@@ -4,6 +4,7 @@ date: '2026-05-27T15:30:00-06:00'
 draft: false
 description: "Hamming wrote in the industrial era that machines rarely produce the same product as hands did. The same is now true of LLMs and knowledge work — and the winning move is to redesign the process, not just speed it up. Here's what the Product Owner role looks like from first principles in an AI-native org."
 tags: [ideas, ai, product]
+ail: 2
 ---
 
 ![A hand re-drawing a workflow on top of a faded grid, with new orange nodes and arrows replacing the old structure](/images/hand-to-machine-blueprint-20260527.png)

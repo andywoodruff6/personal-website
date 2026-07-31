@@ -4,6 +4,7 @@ date: "2026-05-20T13:34:14.849Z"
 draft: false
 description: "In the AI age, the Product Owner is the king of context — and the king of context doesn't just collect, they govern."
 tags: ['AI', 'product', 'context', 'work']
+ail: 2
 ---
 
 ![Product Owner as the king of context](/images/shifting-current-product-owner-context-crown-20260520.png)

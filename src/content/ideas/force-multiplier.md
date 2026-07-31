@@ -4,6 +4,7 @@ date: "2026-05-20T13:35:14.849Z"
 draft: false
 description: "AI amplifies your judgment — good or bad. Here's why building better habits is the real unlock."
 tags: [ai, judgement]
+ail: 2
 ---
 
 ![Force Multipler](/images/force-multiplier-image.png)

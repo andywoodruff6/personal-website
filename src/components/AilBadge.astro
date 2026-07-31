@@ -1,0 +1,104 @@
+---
+/* AI Influence Level badge — the pill that sits inline in .post-meta next to
+   the date and tags. Scale and per-level definitions live at /ail. */
+interface Props {
+  level: number;
+}
+
+const { level } = Astro.props;
+
+const LEVEL_NAMES = [
+  'Human created, no AI involved',
+  'Human created, minor AI assistance',
+  'Human created, major AI augmentation',
+  'AI created, human full structure',
+  'AI created, human basic idea',
+  'AI created, little human involvement',
+];
+
+const value = Math.max(0, Math.min(5, Math.round(level)));
+const name = LEVEL_NAMES[value];
+const segments = [0, 1, 2, 3, 4];
+---
+
+<a
+  class="ail"
+  href="/ail/"
+  data-level={value}
+  title={`AI Influence Level ${value} — ${name}`}
+  aria-label={`AI Influence Level ${value} of 5: ${name}. Read what the scale means.`}
+>
+  <span class="ail-key">AIL</span>
+  <span class="ail-num">{value}</span>
+  <span class="ail-rail" aria-hidden="true">
+    {segments.map((i) => <span class:list={['ail-seg', i < value && 'is-on']} />)}
+  </span>
+</a>
+
+<style>
+  /* Ramp: steel (little AI) → badger (mostly AI). Muted on purpose — this is a
+     disclosure, not a verdict. */
+  .ail[data-level='0'] { --ail-ink: #3E5C82; }
+  .ail[data-level='1'] { --ail-ink: #5A6478; }
+  .ail[data-level='2'] { --ail-ink: #7A6A66; }
+  .ail[data-level='3'] { --ail-ink: #96654B; }
+  .ail[data-level='4'] { --ail-ink: #AC5A2E; }
+  .ail[data-level='5'] { --ail-ink: #B84E12; }
+
+  :global([data-theme='dark']) .ail[data-level='0'] { --ail-ink: #7FA3D0; }
+  :global([data-theme='dark']) .ail[data-level='1'] { --ail-ink: #90A0BC; }
+  :global([data-theme='dark']) .ail[data-level='2'] { --ail-ink: #A99EA0; }
+  :global([data-theme='dark']) .ail[data-level='3'] { --ail-ink: #C09A82; }
+  :global([data-theme='dark']) .ail[data-level='4'] { --ail-ink: #D89162; }
+  :global([data-theme='dark']) .ail[data-level='5'] { --ail-ink: #E8823C; }
+
+  .ail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.08rem 0.4rem 0.08rem 0.2rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-xs);
+    line-height: 1.6;
+    letter-spacing: var(--tracking-caps);
+    color: var(--ail-ink);
+    text-decoration: none;
+    vertical-align: 0.05em;
+  }
+
+  .ail:hover,
+  .ail:focus-visible {
+    border-color: var(--ail-ink);
+    text-decoration: none;
+  }
+
+  .ail-key {
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--color-bg-2);
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+
+  .ail-num {
+    font-weight: 600;
+  }
+
+  .ail-rail {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .ail-seg {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-rule);
+  }
+
+  .ail-seg.is-on {
+    background: var(--ail-ink);
+  }
+</style>

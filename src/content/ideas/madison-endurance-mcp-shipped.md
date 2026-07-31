@@ -4,6 +4,7 @@ date: "2026-05-22T20:00:00.000Z"
 draft: false
 description: "A FastMCP server that joins race discovery, NWS weather, and group rides into one slash-command surface — built as a portfolio piece for the FastMCP team, with two design moves I want to be known for."
 tags: ['mcp', 'fastmcp', 'building']
+ail: 2
 ---
 
 I shipped a small Model Context Protocol server this week — [`madison-endurance-sports-mcp-server`](https://github.com/andywoodruff6/mes-mcp-server) — a FastMCP server for Madison-area endurance athletes. Race discovery, NWS race-day weather, recurring group rides, and simple `/race_prep` slash command. About 90 seconds of demo will tell you faster than I can:

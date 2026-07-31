@@ -4,6 +4,7 @@ date: "2026-07-24T14:26:47.191Z"
 draft: false
 description: "For most of history the generalist had the edge; after the Industrial Revolution specialization took over. Now the AI era reopens the question — where on the spectrum will society land?"
 tags: [ideas, ai, career]
+ail: 1
 ---
 
 ![A hand-drawn sketch: on the left a generalist surrounded by many tools — gears, compass, quill, wrench, book, microscope; on the right a specialist bent over a single magnifying glass; teal and orange current lines connecting the two](/images/sc-generalist-vs-specialist.png)

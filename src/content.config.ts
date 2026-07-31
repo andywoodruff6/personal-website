@@ -34,6 +34,9 @@ const baseSchema = z.object({
   order: z.number().optional(),
   link: optionalString,
   aeo: aeoSchema,
+  /* AI Influence Level, 0–5. Omit and no badge renders — labeling is opt-in.
+     Scale is documented at /ail. */
+  ail: z.number().int().min(0).max(5).optional(),
 });
 
 const projects = defineCollection({
