@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const collections = ['projects', 'predictions', 'ideas', 'curation'] as const;
+const collections = ['projects', 'predictions', 'ideas', 'curation', 'tools'] as const;
 
 const allEntries = (
   await Promise.all(

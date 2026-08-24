@@ -23,6 +23,8 @@ This document defines the rules and conventions for tagging content on the perso
 - `business` - Business strategy and entrepreneurship
 - `personal` - Personal development and reflections
 - `tech` - Technical implementation and tools
+- `mcp` - Model Context Protocol servers
+- `harness` - Agent harness and orchestration tooling
 
 ### Series Tags
 - `yearly-theme` - Annual theme posts

@@ -85,4 +85,13 @@ const products = defineCollection({
   }),
 });
 
-export const collections = { projects, predictions, ideas, curation, themes, products };
+const tools = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/tools' }),
+  schema: baseSchema.extend({
+    status: optionalString,
+    stack: optionalString,
+    repo: optionalString,
+  }),
+});
+
+export const collections = { projects, predictions, ideas, curation, themes, products, tools };

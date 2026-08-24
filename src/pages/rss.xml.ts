@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 
-const sections = ['ideas', 'predictions', 'curation', 'projects'] as const;
+const sections = ['ideas', 'predictions', 'curation', 'projects', 'tools'] as const;
 
 export async function GET(context: APIContext) {
   const all = (

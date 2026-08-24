@@ -1,0 +1,238 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('tools', ({ data }) => import.meta.env.DEV || !data.draft);
+entries.sort((a, b) => {
+  const ao = a.data.order ?? 999;
+  const bo = b.data.order ?? 999;
+  if (ao !== bo) return ao - bo;
+  return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+});
+
+const shipped = entries.filter((e) => !/development|progress|planned/i.test(e.data.status ?? ''));
+const inDev = entries.filter((e) => /development|progress|planned/i.test(e.data.status ?? ''));
+
+const allTags = [...new Set(entries.flatMap((e) => e.data.tags))].sort();
+
+const firstYear = entries
+  .map((e) => e.data.date?.getFullYear())
+  .filter((y): y is number => typeof y === 'number')
+  .sort((a, b) => a - b)[0];
+---
+
+<Base
+  title="Tools"
+  description="Every AI tool I've built and written up — MCP servers, agent harnesses, and the internal tooling that makes work run."
+>
+  <h1>Tools</h1>
+  <p class="lede">
+    Everything I've built and written up. Most of it is agent plumbing — MCP servers, harness
+    pieces, internal tooling — built because I wanted the thing to exist, then documented so the
+    next person doesn't have to start from zero.
+  </p>
+
+  <section class="tools-counter">
+    <div class="tools-stat">
+      <span class="tools-num">{shipped.length}</span>
+      <span class="tools-label">Shipped</span>
+    </div>
+    <div class="tools-stat">
+      <span class="tools-num">{inDev.length}</span>
+      <span class="tools-label">In development</span>
+    </div>
+    {firstYear && (
+      <div class="tools-stat">
+        <span class="tools-num">{firstYear}</span>
+        <span class="tools-label">First deploy</span>
+      </div>
+    )}
+  </section>
+
+  {allTags.length > 0 && (
+    <p class="tools-tags">
+      {allTags.map((t) => <span class="tools-tag">{t}</span>)}
+    </p>
+  )}
+
+  {shipped.length > 0 && <h2>Shipped</h2>}
+  <ul class="tool-list">
+    {shipped.map((e) => (
+      <li class="tool-card">
+        <a href={`/tools/${e.id}/`}>
+          <div class="tool-head">
+            <h3 class="tool-title">{e.data.title}</h3>
+            {e.data.status && <span class="tool-status tool-status-prod">{e.data.status}</span>}
+          </div>
+          {e.data.description && <p class="tool-desc">{e.data.description}</p>}
+          {e.data.stack && <p class="tool-stack">{e.data.stack}</p>}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  {inDev.length > 0 && (
+    <>
+      <h2>In development</h2>
+      <ul class="tool-list">
+        {inDev.map((e) => (
+          <li class="tool-card">
+            <a href={`/tools/${e.id}/`}>
+              <div class="tool-head">
+                <h3 class="tool-title">{e.data.title}</h3>
+                {e.data.status && <span class="tool-status tool-status-dev">{e.data.status}</span>}
+              </div>
+              {e.data.description && <p class="tool-desc">{e.data.description}</p>}
+              {e.data.stack && <p class="tool-stack">{e.data.stack}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>The bet</h2>
+
+  <p>
+    The MCP protocol consolidated in 2025 — one transport survived (Streamable HTTP), auth
+    formalized around OAuth 2.1 + PKCE + Dynamic Client Registration, Cloudflare turned into a
+    first-class host. The hard parts of writing a remote, secure, multi-user server are now
+    ~80% scaffolded. The remaining 20% is the part I want to be known for: agent-native product
+    design — discovery, iteration, context. Most servers expose APIs. The good ones design for
+    how an agent actually <em>uses</em> them.
+  </p>
+
+  <p>
+    The longer bet: agents need trust. MCP today authenticates the user to the server; it
+    doesn't carry verifiable identity for the agent acting on the user's behalf. Self-sovereign
+    identity is the missing layer there — and
+    <a href="/2034/">that's the ten-year bet</a> this work is the agent-side counterpart to.
+  </p>
+</Base>
+
+<style>
+  .lede {
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    max-width: var(--measure);
+  }
+  .tools-counter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+    background: var(--color-code-bg);
+  }
+  .tools-stat {
+    text-align: center;
+  }
+  .tools-num {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+  }
+  .tools-label {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tools-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 2.5rem;
+  }
+  .tools-tag {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .tool-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+  .tool-card {
+    margin: 0 0 1rem;
+  }
+  .tool-card > a {
+    display: block;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .tool-card > a:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .tool-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .tool-title {
+    margin: 0;
+  }
+  .tool-status {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tool-status-prod {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .tool-status-dev {
+    background: var(--color-rule);
+    color: var(--color-muted);
+  }
+  .tool-desc {
+    margin: 0.6rem 0 0;
+    color: var(--color-muted);
+    max-width: var(--measure);
+  }
+  .tool-stack {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 640px) {
+    .tools-counter {
+      padding: 1rem 0.5rem;
+    }
+    .tools-num {
+      font-size: 2rem;
+    }
+  }
+</style>

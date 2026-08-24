@@ -1,12 +1,29 @@
 ---
+import { getCollection } from 'astro:content';
+
+const tools = await getCollection('tools', ({ data }) => import.meta.env.DEV || !data.draft);
+
+// Lead with the count only once the list is long enough to be the point.
+// Below the threshold a bare number undersells it; above, the number IS the pitch.
+const COUNT_THRESHOLD = 8;
+const trackingValue =
+  tools.length >= COUNT_THRESHOLD
+    ? `<a href="/tools/">${tools.length} tools built and written up &rarr;</a>`
+    : '<a href="/tools/">the tools I build, written up &rarr;</a>';
+
 const items = [
   {
-    label: 'shipping',
-    value: '<a href="/products/engram/">Engram</a> — spaced-repetition flashcards',
+    label: 'making',
+    value:
+      'Trellis Fieldbook &mdash; one agentic-powered, self-contained system for solo wedding planners, replacing the docs-and-spreadsheets sprawl',
   },
-  { label: 'reading', value: 'The Art of Doing Science and Engineering (Hamming)<br>Abaddon&rsquo;s Gate (Corey)' },
-  { label: 'building', value: '<a href="/projects/ekko-pai/">EKKO (my PAI)</a>, <a href="/mcp/">Custom MCP Servers</a>' },
-  { label: 'working with', value: 'teams building agent-native products' },
+  { label: 'learning', value: 'how companies build products in the agentic era' },
+  { label: 'tracking', value: trackingValue },
+  {
+    label: 'looking for',
+    value:
+      'a full-time role building the tooling that makes businesses run more efficiently &mdash; <a href="/connect/">get in touch</a>',
+  },
 ];
 ---
 <aside class="currently" aria-label="Currently">
