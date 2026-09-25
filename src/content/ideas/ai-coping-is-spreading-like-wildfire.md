@@ -4,7 +4,7 @@ date: "2026-08-05T20:35:27.944Z"
 draft: false
 description: "The people telling you to ban AI are easy to spot. The friendly expert who mixes real facts with a settled-sounding dismissal is the one to watch."
 tags: ['AI', 'ideas', 'critical-thinking']
-cover: "/images/ai-coping-is-spreading-like-wildfire-header-20260805.jpg"
+cover: "/images/ai-coping-is-spreading-like-wildfire-header-20260925.jpg"
 ail: 1
 ---
 
