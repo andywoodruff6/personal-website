@@ -1,7 +1,7 @@
 ---
 title: "Headless vs Screens"
 date: "2026-09-28T12:00:00-05:00"
-draft: true
+draft: false
 description: "The tech is ready for a world where our agents do the clicking, but society will take years longer to get there."
 tags: [ideas, AI]
 ail: 1
